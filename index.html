@@ -16,35 +16,22 @@
 <body>
     <nav>
         <div class="row nav-wrapper">
-            <a class="col s2 m2 l2 offset-l1 title" href="#listContainer">Movies</a>
+            <a id="movies" class="col s2 m2 l2 offset-l1 title" href="#">Movies</a>
         </div>
     </nav>
-    <div class="row container">
-        <!-- Contenedor inicial con imagen circular-->
-        <!-- <ul class="row listContainer">
-            <li class="col s9 m9 l9 offset-l1">
-                <a href="#collapsible">${title}</a>
-                <p class="col s2 m2 l2">${year}</p>
-                <p class="col s6 m6 l6 offset-l1">${actors}</p>                
-            </li>
-        </ul>-->
-
-        <!-- Contenedor secundario con imagen cuadrada-->
-
-        <ul class="collapsible">
+    <!-- Contenedor principal-->
+    <div class="container">         
+        <ul class="collapsible hiden show-on-large">
             <!--  <li>
-            <div class="collapsible-header">
-                <p>Titulo</p>
+            <div class="row collapsible-header">
+                <p class="col l4">${title}</p>          
+                <p class="col l4">${year}</p>
+                <p class="col l4">${director}</p>                
             </div>
-            <div class="collapsible-header">
-                <p>Año</p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header">
-                <p>Datos</p>
-            </div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-body"><span>${actors}</span></div>
+            <div class="collapsible-body"><span>${plot}</span></div>
+            <div class="collapsible-body"><span>${awards}</span></div>
+            <div class="collapsible-body"><span>${website}</span></div>
         </li>-->
         </ul>
     </div>
