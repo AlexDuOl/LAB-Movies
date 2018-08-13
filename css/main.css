@@ -1,7 +1,5 @@
 /* FONTS
-ont-family: 'Pacifico', cursive;
-font-family: 'Gloria Hallelujah', cursive;
-font-family: 'Permanent Marker', cursive;
+font-family: 'Roboto', sans-serif;
 */
 
 body {
@@ -14,7 +12,7 @@ nav {
 }
 
 .title {
-    font-family: 'Permanent Marker', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 3em;
     margin-top: .5%;
 }
@@ -30,4 +28,17 @@ nav {
     opacity: 0.5;
     height: 20vh;
     width: 78vw;
+}
+
+.collapsible {
+    display: none;
+}
+
+img {
+    height: 2%;
+}
+
+.texto {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
 }
