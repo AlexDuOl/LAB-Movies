@@ -4,10 +4,9 @@ $(document).ready(function() {
 
 //*****MOSTRAR******//
 
-$("#movies").click(function(collapsibleMovies) {
-    $(".collapsible").addClass("show-on-medium-and-up");
+$('#movies').click(function(collapsibleMovies) {
+    $('.collapsible').addClass("show-on-medium-and-up");
     console.log(collapsibleMovies);
-
 });
 
 
@@ -25,7 +24,7 @@ function collapsibleMovies(poster_path, title, release_date, overview, popularit
             </div> 
         </div>  
         <div class="collapsible-body texto"><span>${overview}</span></div>
-        <div class="collapsible-body texto"><span>Popularidad:   ${popularity}%</span></div>
+        <div class="collapsible-body texto"><span>Popularidad:   ${popularity}</span></div>
     </li>`
 
     return collapsibleMovies
@@ -47,11 +46,12 @@ fetch('https://api.themoviedb.org/3/discover/movie?api_key=3ebb69eca51521a30088e
             var release_date = data.results[i].release_date;
             var overview = data.results[i].overview;
             var popularity = data.results[i].popularity;
-
-            do {
-                $(".collapsible").append(collapsibleMovies(poster_path, title, release_date, overview, popularity));
-            } while (i === data.results.length);
         }
+        do {
+            $('.collapsible').append(collapsibleMovies(poster_path, title, release_date, overview, popularity));
+
+        } while (i === data.results.length);
+
     })
     .catch(function(error) {
         console.log('Hubo un problema con la petición Fetch:' + error.message);
