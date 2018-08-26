@@ -1,67 +1,58 @@
 $(document).ready(function() {
-    $('.collapsible').collapsible(); 
+    $('.collapsible').collapsible();
 });
 
 //*****MOSTRAR******//
 
-$("#movies").click(function(collapsibleMovies){
-    $(".collapsible").addClass("show-on-medium-and-up"); 
+$("#movies").click(function(collapsibleMovies) {
+    $(".collapsible").addClass("show-on-medium-and-up");
     console.log(collapsibleMovies);
-      
+
 });
 
 
 //*****TEMPLATE******/
-function collapsibleMovies(title, year, actors, plot, awards, director, website, poster) {
-   
+function collapsibleMovies(poster_path, title, release_date, overview, popularity) {
+
     const collapsibleMovies =
-    `<li>
-        <div class="row collapsible-header">
-            <img class="col l2" src="${poster}"/>
-            <p class="col l5 texto">${title}</p>          
-            <p class="col l2 texto">Año: ${year}</p>
-            <p class="col l3 texto">Director: ${director}</p> 
-        </div>
-        <div class="collapsible-body texto"><span>Actores: ${actors}</span></div>
-        <div class="collapsible-body texto"><span>Trama: ${plot}</span></div>
-        <div class="collapsible-body texto"><span>Premios: ${awards}</span></div>
-        <div class="collapsible-body texto"><span>Sitio Web: ${website}</span></div>
+        `<li>
+        <div class="row collapsible-header">   
+            <img class="col l2" src="${poster_path}"/>
+            <div class="row">
+            <h4 class="col l8 offset-l3">${title}</h4> 
+            <p class="col l8 texto">Fecha de lanzamiento</p>          
+            <p class="col l4 texto">${release_date}</p> 
+            </div> 
+        </div>  
+        <div class="collapsible-body texto"><span>${overview}</span></div>
+        <div class="collapsible-body texto"><span>Popularidad:   ${popularity}%</span></div>
     </li>`
 
     return collapsibleMovies
 }
 
-
-//*****OBTENIENDO DATA PARA TEMPLATE******//
-$(document).ready(function() {
-    dir = "http://www.omdbapi.com/?i=tt3896198&apikey=c7d395b9"
-
-    $.ajax({
-        url: dir,
-        onError: function(err) {
-            alert(err);
+//*****OBTENIENDO LA DATA******/
+fetch('https://api.themoviedb.org/3/discover/movie?api_key=3ebb69eca51521a30088e0d37d49aa2c')
+    .then(function(response) {
+        if (response.ok) {
+            return response.json();
         }
-
-    }).done(function(data) {
+    })
+    .then(function(data) {
         console.log(data);
 
-        let title = data.Title;
-        let year = data.Year;
-        let actors = data.Actors;
-        let plot = data.Plot;
-        let awards = data.Awards;
-        let director = data.Director;
-        let website = data.Website;
-        let poster = data.Poster;
+        for (var i = 0; i < data.results.length; i++) {
+            var poster_path = "https://image.tmdb.org/t/p/w780" + data.results[i].poster_path;
+            var title = data.results[i].title;
+            var release_date = data.results[i].release_date;
+            var overview = data.results[i].overview;
+            var popularity = data.results[i].popularity;
 
-
-        $(".collapsible").append(collapsibleMovies(title, year, actors, plot, awards, director, website, poster));
-
+            do {
+                $(".collapsible").append(collapsibleMovies(poster_path, title, release_date, overview, popularity));
+            } while (i === data.results.length);
+        }
     })
-    
-})
-
-
-
-
-
+    .catch(function(error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+    });
