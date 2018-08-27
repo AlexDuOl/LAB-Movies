@@ -16,7 +16,7 @@ function collapsibleMovies(poster_path, title, release_date, overview, popularit
     const collapsibleMovies =
         `<li>
         <div class="row collapsible-header">   
-            <img class="col l2" src="${poster_path}"/>
+            <img class="col l2 offset-l1" src="${poster_path}"/>
             <div class="row">
             <h4 class="col l8 offset-l3">${title}</h4> 
             <p class="col l8 texto">Fecha de lanzamiento</p>          
@@ -46,11 +46,11 @@ fetch('https://api.themoviedb.org/3/discover/movie?api_key=3ebb69eca51521a30088e
             var release_date = data.results[i].release_date;
             var overview = data.results[i].overview;
             var popularity = data.results[i].popularity;
-        }
-        do {
-            $('.collapsible').append(collapsibleMovies(poster_path, title, release_date, overview, popularity));
 
-        } while (i === data.results.length);
+            do {
+                $('.collapsible').append(collapsibleMovies(poster_path, title, release_date, overview, popularity));
+            } while (i === data.results.length);
+        }
 
     })
     .catch(function(error) {
